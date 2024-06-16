@@ -16,7 +16,7 @@ const getApiKey = () => {
   return apiKey;
 };
 
-const fetchFromAPI = async (url) => {
+export const fetchFromAPI = async (url) => {
   const options = {
     method: "GET",
     headers: {
@@ -30,7 +30,6 @@ const fetchFromAPI = async (url) => {
     return data;
   } catch (error) {
     if (error.response && error.response.status === 429) {
-      // API limit reached, try next key
       options.headers['X-RapidAPI-Key'] = getApiKey();
       const { data } = await axios.get(`${BASE_URL}/${url}`, options);
       return data;
@@ -41,4 +40,4 @@ const fetchFromAPI = async (url) => {
   }
 };
 
-export default fetchFromAPI;
+
